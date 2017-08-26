@@ -10,6 +10,8 @@ import com.app.hostel.dao.UserDao;
 import com.app.hostel.dao.UserDaoImpl;
 import com.app.hostel.entity.User;
 
+
+
 @Service("userService")
 public class UserService {
 	
