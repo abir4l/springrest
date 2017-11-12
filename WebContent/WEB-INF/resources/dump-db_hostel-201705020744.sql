@@ -175,16 +175,16 @@ CREATE TABLE `tbl_customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `passport_number` varchar(100) NOT NULL,
+  `passportNumber` varchar(100) NOT NULL,
   `nation` varchar(100) NOT NULL,
   `phone` varchar(100) DEFAULT NULL,
   `deleted` tinyint(1) DEFAULT '0',
-  `parent_id` int(1) DEFAULT NULL,
+  `parentId` int(1) DEFAULT NULL,
   `created_on` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `modified_on` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `tbl_customers_parent_id_IDX` (`parent_id`),
-  CONSTRAINT `tbl_customers_tbl_customers_FK` FOREIGN KEY (`parent_id`) REFERENCES `tbl_customers` (`id`)
+  KEY `tbl_customers_parent_id_IDX` (`parentId`),
+  CONSTRAINT `tbl_customers_tbl_customers_FK` FOREIGN KEY (`parentId`) REFERENCES `tbl_customers` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

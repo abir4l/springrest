@@ -27,7 +27,7 @@
     </mapping>
     <mapping>
         <class-a>com.app.hostel.entity.Product</class-a>
-        <class-a>com.app.hostel.dto.CustomerProductDTO</class-a>
+        <class-b>com.app.hostel.dto.CustomerProductDTO</class-b>
         <field>
             <a>description</a>
             <b>description</b>

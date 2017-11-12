@@ -26,6 +26,8 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	public void createCustomer(Customer customer) {
 
 		Session session = getSession(sessionFactory);
+		if(customer.getParentId() != null)
+		customer.setParent((Customer)session.get(Customer.class,customer.getParentId()));
 		session.persist(customer);
 		closeSession(session);
 
@@ -36,6 +38,8 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 
 		Session session = getSession(sessionFactory);
 		Customer customer = (Customer) session.get(Customer.class, id);
+		if(customer.getParent() != null)
+			customer.setParentId(customer.getParent().getId());
 		closeSession(session);
 		return customer;
 
@@ -47,6 +51,10 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 
 		Session session = getSession(sessionFactory);
 		List<Customer> customers = session.createCriteria(Customer.class).setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY).list();
+		for (Customer customer:customers) {
+			if(customer.getParent() != null)
+				customer.setParentId(customer.getParent().getId());
+		}
 		session.clear();
 		closeSession(session);
 		return customers;

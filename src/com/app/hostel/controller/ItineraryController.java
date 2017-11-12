@@ -23,10 +23,10 @@ public class ItineraryController {
 
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> addItinerary(@RequestBody Itinerary itinerary) {
+	public ResponseEntity<String> addItinerary(@RequestBody Itinerary itinerary) {
 		
 		itineraryService.createItinerary(itinerary);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		return new ResponseEntity<>("Itinerary added Successfully",HttpStatus.CREATED);
 	}
 
 	@RequestMapping("/{id}")
@@ -42,10 +42,10 @@ public class ItineraryController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT)
-		public ResponseEntity<Itinerary> updateItinerary( @RequestBody Itinerary itinerary) {
+		public ResponseEntity<String> updateItinerary( @RequestBody Itinerary itinerary) {
 		
 		itineraryService.updateItinerary(itinerary);
-		return new ResponseEntity<>(itinerary,HttpStatus.OK);
+		return new ResponseEntity<>("Itinerary updated",HttpStatus.OK);
 	}
 
 	@RequestMapping(method = RequestMethod.DELETE,value="/{id}")

@@ -1,15 +1,9 @@
 package com.app.hostel.entity;
 
+import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.codehaus.jackson.annotate.JsonIgnore;
 
@@ -28,27 +22,34 @@ public class Customer extends Base {
 	@Column(name = "email")
 	private String email;
 
+	@Column(name="from_date")
+	private Date from;
+
+	@Column(name="to_date")
+	private Date to;
 
 	@Column(name = "passport_number")
-	private String passport_number;
+	private String passportNumber;
 
 	@Column(name = "nation")
 	private String nation;
 
-	@Transient
-	@JsonIgnore
-	private Integer parent_id;
 
-	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+
+	@Transient
+	private Integer parentId;
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "parent_id")
+	@JsonIgnore
 	private Customer parent;
 
-	@OneToMany(mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.MERGE, orphanRemoval = true)
+	@OneToMany(mappedBy = "parent", fetch = FetchType.EAGER, cascade = CascadeType.MERGE, orphanRemoval = true)
 	@JsonIgnore
 	private Set<Customer> children;
 
-	public Integer getParent_id() {
-		return parent_id;
+	public Integer getParentId() {
+		return parentId;
 	}
 
 	public Customer getParent() {
@@ -63,8 +64,8 @@ public class Customer extends Base {
 		this.children = children;
 	}
 
-	public void setParent_id(Integer parent_id) {
-		this.parent_id = parent_id;
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
 	}
 
 	public String getName() {
@@ -84,12 +85,12 @@ public class Customer extends Base {
 		this.email = email;
 	}
 
-	public String getPassport_number() {
-		return passport_number;
+	public String getPassportNumber() {
+		return passportNumber;
 	}
 
-	public void setPassport_number(String passport_number) {
-		this.passport_number = passport_number;
+	public void setPassportNumber(String passportNumber) {
+		this.passportNumber = passportNumber;
 	}
 
 	public String getNation() {
@@ -116,6 +117,25 @@ public class Customer extends Base {
 		this.products = products;
 	}
 
+	public Date getFrom() {
+		return from;
+	}
+
+	public void setFrom(Date from) {
+		this.from = from;
+	}
+
+	public Date getTo() {
+		return to;
+	}
+
+	public void setTo(Date to) {
+		this.to = to;
+	}
+
+	public void setParent(Customer parent) {
+		this.parent = parent;
+	}
 
 
 }

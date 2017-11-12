@@ -23,23 +23,21 @@ public class CustomerController {
 
 	@Autowired
 	private CustomerService customerService;
-	@Autowired
-	private Mapper mapper;
+
 
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> addCustomer(@RequestBody Customer customer) {
-		
 		customerService.createCustomer(customer);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 
 	}
 
 	@RequestMapping("/{id}")
-	public ResponseEntity<CustomerDTO> getCustomer(@PathVariable("id") Integer id) {
+	public ResponseEntity<Customer> getCustomer(@PathVariable("id") Integer id) {
 		Customer customer = customerService.getCustomer(id);
-		CustomerDTO customerDTO = mapper.map(customer, CustomerDTO.class);
-		return new ResponseEntity<>(customerDTO,HttpStatus.OK);
+		//CustomerDTO customerDTO = mapper.map(customer, CustomerDTO.class);
+		return new ResponseEntity<>(customer,HttpStatus.OK);
 
 	}
 
@@ -65,10 +63,10 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct/{product_id}/{quantity}")
-	public ResponseEntity<String> buyProduct(@PathVariable("product_id") Integer id, @PathVariable("quantity")Integer quantity){
+	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct/}")
+	public ResponseEntity<String> buyProduct(@RequestBody Customer customer){
 	
-		customerService.buyProduct(id,quantity);
+		customerService.updateCustomer(customer);
 		return new ResponseEntity<>("Bought Successfully", HttpStatus.OK);
 	}
 }

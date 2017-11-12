@@ -23,6 +23,7 @@ public class CustomerItinerary {
     private Customer customer;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name="itinerary_id")
     private Itinerary itinerary;
 

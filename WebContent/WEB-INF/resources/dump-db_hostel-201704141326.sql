@@ -173,7 +173,7 @@ CREATE TABLE `tbl_customers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
   `email` varchar(100) DEFAULT NULL,
-  `passport_number` varchar(100) NOT NULL,
+  `passportNumber` varchar(100) NOT NULL,
   `nation` varchar(100) NOT NULL,
   `phone` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`)
