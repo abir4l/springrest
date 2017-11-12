@@ -26,8 +26,12 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	public void createCustomer(Customer customer) {
 
 		Session session = getSession(sessionFactory);
-		if(customer.getParentId() != null)
-		customer.setParent((Customer)session.get(Customer.class,customer.getParentId()));
+		if(customer.getParentId() != null && customer.getParentId() != 0){
+
+			Customer parentCustomer= (Customer) session.get(Customer.class, customer.getParentId());
+			customer.setParent(parentCustomer);
+		}
+
 		session.persist(customer);
 		closeSession(session);
 
@@ -64,6 +68,14 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	public void updateCustomer(Customer customer) {
 
 		Session session = getSession(sessionFactory);
+
+		if(customer.getParentId() != null && customer.getParentId() != 0){
+
+			Customer parentCustomer= (Customer) session.get(Customer.class, customer.getParentId());
+			customer.setParent(parentCustomer);
+		}
+
+
 		session.update(customer);
 		closeSession(session);
 

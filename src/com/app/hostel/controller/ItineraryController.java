@@ -23,10 +23,10 @@ public class ItineraryController {
 
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<String> addItinerary(@RequestBody Itinerary itinerary) {
+	public ResponseEntity<Itinerary> addItinerary(@RequestBody Itinerary itinerary) {
 		
 		itineraryService.createItinerary(itinerary);
-		return new ResponseEntity<>("Itinerary added Successfully",HttpStatus.CREATED);
+		return new ResponseEntity<>(itinerary,HttpStatus.CREATED);
 	}
 
 	@RequestMapping("/{id}")
