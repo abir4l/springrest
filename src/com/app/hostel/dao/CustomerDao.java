@@ -4,6 +4,7 @@ import java.util.List;
 
 
 import com.app.hostel.entity.Customer;
+import com.app.hostel.entity.CustomerProducts;
 
 
 public interface CustomerDao {
@@ -18,5 +19,7 @@ public interface CustomerDao {
 	
 	public void deleteCustomer(Integer id);
 
-	public void buyProduct(Integer id, Integer quantity);
+	public void buyProduct(Integer id, Integer quantity,Integer customer_id);
+
+	public CustomerProducts demoProduct();
 }

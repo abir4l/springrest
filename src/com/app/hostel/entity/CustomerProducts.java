@@ -13,7 +13,6 @@ public class CustomerProducts{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private Integer id;
 
     public Integer getId() {
@@ -29,8 +28,10 @@ public class CustomerProducts{
     @JsonIgnore
     private Customer customer;
 
+    @Transient
+    private Integer customerId;
+
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "product_id")
     private Product product;
 
@@ -56,5 +57,17 @@ public class CustomerProducts{
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 }

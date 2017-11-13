@@ -3,6 +3,7 @@ package com.app.hostel.controller;
 import java.util.List;
 
 import com.app.hostel.dto.CustomerDTO;
+import com.app.hostel.entity.CustomerProducts;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,11 @@ public class CustomerController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ResponseEntity<List<Customer>> getAllCustomers() {
 		List<Customer> customers = customerService.getCustomers();
+		for (Customer customer:customers) {
+			for(CustomerProducts customerProduct:customer.getProducts()){
+				customerProduct.setCustomerId(customerProduct.getCustomer().getId());
+			}
+		}
 		return new ResponseEntity<>(customers, HttpStatus.OK);
 		
 	}
@@ -63,10 +69,15 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct/}")
-	public ResponseEntity<String> buyProduct(@RequestBody Customer customer){
-	
-		customerService.updateCustomer(customer);
+	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct}")
+	public ResponseEntity<String> buyProduct(@RequestBody CustomerProducts customerProduct){
+
+		customerService.buyProduct(customerProduct.getProduct().getId(),customerProduct.getQuantity(),customerProduct.getCustomerId());
 		return new ResponseEntity<>("Bought Successfully", HttpStatus.OK);
+	}
+
+	@RequestMapping(method=RequestMethod.GET,value = "/demo")
+	public ResponseEntity<CustomerProducts> seeProduct(){
+		return new ResponseEntity<CustomerProducts>(customerService.getDemoProduct(),HttpStatus.OK);
 	}
 }

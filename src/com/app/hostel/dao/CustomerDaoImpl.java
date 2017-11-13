@@ -93,10 +93,10 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	}
 
 	@Override
-	public void buyProduct(Integer id,Integer quantity) {
+	public void buyProduct(Integer id,Integer quantity,Integer customer_id) {
 		
 		Session session = getSession(sessionFactory);
-		Customer customer = (Customer) session.get(Customer.class, 1);// need to change to principle
+		Customer customer = (Customer) session.get(Customer.class, customer_id);
 		Product product = (Product) session.get(Product.class, id);
 		CustomerProducts customerProducts  = new CustomerProducts();
 		customerProducts.setQuantity(quantity);
@@ -105,6 +105,14 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		session.save(customerProducts);
 		closeSession(session);
 
+	}
+
+	@Override
+	public CustomerProducts demoProduct() {
+		Session session = getSession(sessionFactory);
+		CustomerProducts customerProducts = (CustomerProducts) session.get(CustomerProducts.class,1);
+		closeSession(session);
+		return customerProducts;
 	}
 
 }

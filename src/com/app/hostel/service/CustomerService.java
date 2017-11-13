@@ -2,6 +2,7 @@ package com.app.hostel.service;
 
 import java.util.List;
 
+import com.app.hostel.entity.CustomerProducts;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,8 +45,12 @@ public class CustomerService{
 	}
 
 
-	public void buyProduct(Integer id, Integer quantity) {
+	public void buyProduct(Integer id, Integer quantity,Integer customer_id) {
 		
-		customerDaoImpl.buyProduct(id,quantity);
+		customerDaoImpl.buyProduct(id,quantity,customer_id);
 	}
+
+    public CustomerProducts getDemoProduct() {
+		return customerDaoImpl.demoProduct();
+    }
 }
