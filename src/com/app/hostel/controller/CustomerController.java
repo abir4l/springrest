@@ -3,6 +3,7 @@ package com.app.hostel.controller;
 import java.util.List;
 
 import com.app.hostel.dto.CustomerDTO;
+import com.app.hostel.entity.CustomerItinerary;
 import com.app.hostel.entity.CustomerProducts;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,15 +70,19 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct")
+	@RequestMapping(method = RequestMethod.POST,value = "/buyProduct")
 	public ResponseEntity<String> buyProduct(@RequestBody CustomerProducts customerProduct){
 
 		customerService.buyProduct(customerProduct.getProduct().getId(),customerProduct.getQuantity(),customerProduct.getCustomerId());
 		return new ResponseEntity<>("Bought Successfully", HttpStatus.OK);
 	}
 
-	@RequestMapping(method=RequestMethod.GET,value = "/demo")
-	public ResponseEntity<CustomerProducts> seeProduct(){
-		return new ResponseEntity<CustomerProducts>(customerService.getDemoProduct(),HttpStatus.OK);
+	@RequestMapping(method = RequestMethod.POST,value = "/buyItinerary")
+	public ResponseEntity<String> buyItinerary(@RequestBody CustomerItinerary customerItinerary){
+
+		customerService.buyItinerary(customerItinerary.getItinerary().getId(),customerItinerary.getQuantity(),customerItinerary.getCustomerId());
+		return new ResponseEntity<>("Bought Successfully", HttpStatus.OK);
 	}
+
+
 }

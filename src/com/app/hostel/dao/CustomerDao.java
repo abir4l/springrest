@@ -20,6 +20,6 @@ public interface CustomerDao {
 	public void deleteCustomer(Integer id);
 
 	public void buyProduct(Integer id, Integer quantity,Integer customer_id);
+	public void buyItinerary(Integer id, Integer quantity,Integer customer_id);
 
-	public CustomerProducts demoProduct();
 }

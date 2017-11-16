@@ -4,6 +4,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by abiral on 5/15/17.
@@ -14,18 +15,30 @@ public class CustomerItinerary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @JsonIgnore
     private Integer id;
 
 
     @ManyToOne
     @JoinColumn(name = "customer_id")
+    @JsonIgnore
     private Customer customer;
 
+    @Transient
+    private Integer customerId;
+
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name="itinerary_id")
     private Itinerary itinerary;
+
+
+
+    @Column(name = "quantity")
+    private Integer quantity;
+
+    @Column(name = "created_on" ,nullable = false,
+            columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
+    private Date createdOn;
+
 
     public Customer getCustomer() {
         return customer;
@@ -50,4 +63,29 @@ public class CustomerItinerary {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
+    }
+
 }

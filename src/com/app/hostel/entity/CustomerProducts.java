@@ -3,6 +3,7 @@ package com.app.hostel.entity;
 import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by abiral on 5/13/17.
@@ -38,6 +39,9 @@ public class CustomerProducts{
     @Column(name = "quantity")
     private Integer quantity;
 
+    @Column(name = "created_on" ,nullable = false,
+            columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
+    private Date createdOn;
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
@@ -69,5 +73,13 @@ public class CustomerProducts{
 
     public void setCustomerId(Integer customerId) {
         this.customerId = customerId;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+    public void setCreatedOn(Date createdOn) {
+        this.createdOn = createdOn;
     }
 }

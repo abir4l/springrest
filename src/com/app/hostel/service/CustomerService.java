@@ -50,7 +50,11 @@ public class CustomerService{
 		customerDaoImpl.buyProduct(id,quantity,customer_id);
 	}
 
-    public CustomerProducts getDemoProduct() {
-		return customerDaoImpl.demoProduct();
-    }
+	public void buyItinerary(Integer id, Integer quantity,Integer customer_id) {
+
+		customerDaoImpl.buyItinerary(id,quantity,customer_id);
+	}
+
+
+
 }

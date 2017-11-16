@@ -18,8 +18,8 @@ public class BaseDao {
 	}
 	
 	public void  closeSession(Session session){
-		
-		tx.commit();
+		if(!tx.wasCommitted())
+			tx.commit();
 		session.close();
 		
 	}

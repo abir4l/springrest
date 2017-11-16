@@ -10,7 +10,7 @@ import org.codehaus.jackson.annotate.JsonIgnore;
 @Entity(name = "tbl_products")
 public class Product extends Base {
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product", cascade = CascadeType.MERGE)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "product")
 	private Set<CustomerProducts> customerProducts = new HashSet<>(0);
 
 	@Column(name = "description")

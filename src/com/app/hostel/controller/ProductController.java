@@ -1,6 +1,7 @@
 package com.app.hostel.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<List<Product>> getAllProducts() {
+	public ResponseEntity<Set<Product>> getAllProducts() {
 		return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
 		
 	}

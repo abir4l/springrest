@@ -34,8 +34,6 @@ public class Customer extends Base {
 	@Column(name = "nation")
 	private String nation;
 
-
-
 	@Transient
 	private Integer parentId;
 

@@ -3,11 +3,8 @@ package com.app.hostel.entity;
 import java.util.Date;
 
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+
 @MappedSuperclass
 public class Base {
 
@@ -17,8 +14,11 @@ public class Base {
 	
 	@Column(name = "deleted")
 	private boolean deleted;
-	
-	@Column(name = "created_on")
+
+	@Temporal(TemporalType.TIMESTAMP)
+
+	@Column(name = "created_on" ,nullable = false,
+			columnDefinition="TIMESTAMP default CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP")
 	private Date createdOn;
 	
 	@Column( name = "modified_on")

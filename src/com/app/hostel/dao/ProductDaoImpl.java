@@ -1,6 +1,8 @@
 package com.app.hostel.dao;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,14 +61,14 @@ public class ProductDaoImpl extends BaseDao implements ProductDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 
 		Session session = getSession(sessionFactory);
 		List<Product> products = session.createCriteria(Product.class)
 				.add(Restrictions.eq("deleted",false))
 				.list();
 		closeSession(session);
-		return products;
+		return new HashSet<Product>(products);
 
 	}
 

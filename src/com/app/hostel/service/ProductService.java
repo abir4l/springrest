@@ -1,6 +1,7 @@
 package com.app.hostel.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +38,7 @@ public class ProductService{
 	}
 
 	 
-	public List<Product> getProducts() {
+	public Set<Product> getProducts() {
 		 
 		return productDaoImpl.getProducts();
 	}

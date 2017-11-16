@@ -2,15 +2,12 @@ package com.app.hostel.dao;
 
 import java.util.List;
 
-import com.app.hostel.entity.CustomerProducts;
+import com.app.hostel.entity.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.app.hostel.entity.Customer;
-import com.app.hostel.entity.Product;
 
 @Component
 public class CustomerDaoImpl extends BaseDao implements CustomerDao {
@@ -108,11 +105,19 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 	}
 
 	@Override
-	public CustomerProducts demoProduct() {
+	public void buyItinerary(Integer id, Integer quantity, Integer customer_id) {
 		Session session = getSession(sessionFactory);
-		CustomerProducts customerProducts = (CustomerProducts) session.get(CustomerProducts.class,1);
+		Customer customer = (Customer) session.get(Customer.class, customer_id);
+		Itinerary itinerary = (Itinerary)session.get(Itinerary.class,id);
+		CustomerItinerary customerItinerary = new CustomerItinerary();
+		customerItinerary.setQuantity(quantity);
+		customerItinerary.setItinerary(itinerary);
+		customerItinerary.setCustomer(customer);
+		session.save(customerItinerary);
 		closeSession(session);
-		return customerProducts;
+
+
 	}
+
 
 }
