@@ -69,7 +69,7 @@ public class CustomerController {
 	}
 	
 	
-	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct}")
+	@RequestMapping(method = RequestMethod.POST,value = "/buyproduct")
 	public ResponseEntity<String> buyProduct(@RequestBody CustomerProducts customerProduct){
 
 		customerService.buyProduct(customerProduct.getProduct().getId(),customerProduct.getQuantity(),customerProduct.getCustomerId());
