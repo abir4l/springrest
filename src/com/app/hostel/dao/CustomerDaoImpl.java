@@ -3,6 +3,7 @@ package com.app.hostel.dao;
 import java.util.List;
 
 import com.app.hostel.entity.*;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.CriteriaSpecification;
@@ -97,9 +98,24 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		Product product = (Product) session.get(Product.class, id);
 		CustomerProducts customerProducts  = new CustomerProducts();
 		customerProducts.setQuantity(quantity);
+
+		Stock stock = new Stock();
+		stock.setProduct(product);
+		stock.setInitialStock(product.getQuantity());
+
+		product.setQuantity(product.getQuantity()-customerProducts.getQuantity());
+
+		stock.setFinalStock(product.getQuantity());
+		stock.setSpent_quantity(customerProducts.getQuantity());
+		stock.setRemarks("Customer Purchase");
+
+
+
+
 		customerProducts.setCustomer(customer);
 		customerProducts.setProduct(product);
 		session.save(customerProducts);
+		session.save(stock);
 		closeSession(session);
 
 	}
@@ -117,6 +133,26 @@ public class CustomerDaoImpl extends BaseDao implements CustomerDao {
 		closeSession(session);
 
 
+	}
+
+	@Override
+	public List<CustomerTransaction> getPaymentAmount(Integer customerId) {
+		Session session = getSession(sessionFactory);
+		String sql = "Select * from tbl_customer_transaction where customer_id=:customer_id";
+		Query query = session.createSQLQuery(sql).addEntity(CustomerTransaction.class)
+				.setParameter("customer_id",customerId);
+		List <CustomerTransaction> amount = query.list();
+		return amount;
+
+	}
+
+	@Override
+	public String createCustomerTransaction(CustomerTransaction customerTransaction) {
+		Session session = getSession(sessionFactory);
+		session.save(customerTransaction);
+		closeSession(session);
+
+		return "Transaction created";
 	}
 
 

@@ -2,7 +2,7 @@ package com.app.hostel.service;
 
 import java.util.List;
 
-import com.app.hostel.entity.CustomerProducts;
+import com.app.hostel.entity.CustomerTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -56,5 +56,11 @@ public class CustomerService{
 	}
 
 
+	public List<CustomerTransaction> getPaymentAmount(Integer customerId) {
+		return customerDaoImpl.getPaymentAmount(customerId);
+	}
 
+	public String createCustomerTransaction(CustomerTransaction customerTransaction) {
+		return customerDaoImpl.createCustomerTransaction(customerTransaction);
+	}
 }

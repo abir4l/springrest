@@ -4,7 +4,7 @@ import java.util.List;
 
 
 import com.app.hostel.entity.Customer;
-import com.app.hostel.entity.CustomerProducts;
+import com.app.hostel.entity.CustomerTransaction;
 
 
 public interface CustomerDao {
@@ -21,5 +21,7 @@ public interface CustomerDao {
 
 	public void buyProduct(Integer id, Integer quantity,Integer customer_id);
 	public void buyItinerary(Integer id, Integer quantity,Integer customer_id);
+	public List<CustomerTransaction> getPaymentAmount(Integer customerId);
+	public String createCustomerTransaction(CustomerTransaction customerTransaction);
 
 }

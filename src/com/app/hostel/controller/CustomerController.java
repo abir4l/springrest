@@ -5,6 +5,7 @@ import java.util.List;
 import com.app.hostel.dto.CustomerDTO;
 import com.app.hostel.entity.CustomerItinerary;
 import com.app.hostel.entity.CustomerProducts;
+import com.app.hostel.entity.CustomerTransaction;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -83,6 +84,27 @@ public class CustomerController {
 		customerService.buyItinerary(customerItinerary.getItinerary().getId(),customerItinerary.getQuantity(),customerItinerary.getCustomerId());
 		return new ResponseEntity<>("Bought Successfully", HttpStatus.OK);
 	}
+
+
+	@RequestMapping(method = RequestMethod.POST,value = "/amount")
+	private ResponseEntity<String> payAmount(@RequestBody CustomerTransaction customerTransaction){
+
+		;
+		return new ResponseEntity<String>(
+				customerService.createCustomerTransaction(customerTransaction),
+				HttpStatus.OK);
+	}
+
+
+	@RequestMapping(method = RequestMethod.GET,value = "/amount/{customerId}")
+	private ResponseEntity<List<CustomerTransaction>> getAmount(
+			@PathVariable("customerId") Integer customerId
+	){
+		CustomerTransaction customerTransaction = new CustomerTransaction();
+		List<CustomerTransaction> customerTransactions = customerService.getPaymentAmount(customerId);
+		return new ResponseEntity<>(customerTransactions, HttpStatus.OK);
+	}
+
 
 
 }
